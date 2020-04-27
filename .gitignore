@@ -1,0 +1,42 @@
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+.mvn/wrapper
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
+
+/node
+/node_modules
+
+
+### VS Code ###
+.vscode/
+
+# Local configuration file (sdk path, etc)
+
+.idea_modules/
+.mvn/
