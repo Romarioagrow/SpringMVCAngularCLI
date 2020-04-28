@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
 
 export interface PeriodicElement {
   name: string;
@@ -26,9 +27,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './product-table.component.html',
   styleUrls: ['./product-table.component.css']
 })
-export class ProductTableComponent {
+export class ProductTableComponent implements OnInit {
+
+  constructor(private http: HttpClient){
+  }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+  ngOnInit(): void {
+    this.http.get('http://localhost:8080/app-cli/api/products').subscribe(data => {
+      console.log(data);
+    });
+  }
+
 
 }

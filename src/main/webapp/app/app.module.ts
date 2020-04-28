@@ -9,7 +9,9 @@ import {MatTableModule} from "@angular/material/table";
 import { ProductTableComponent } from './product-table/product-table.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-
+import { HttpClientModule } from '@angular/common/http';
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 /*import { MatTableModule } from "@angular/material"*/
 
 
@@ -31,7 +33,11 @@ import {MatGridListModule} from "@angular/material/grid-list";
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
