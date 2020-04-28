@@ -1,11 +1,11 @@
-<button nbButton outline status="basic" routerLink="/">Home</button>
+<button nbButton outline status="basic" routerLink="/app-cli">Home</button>
 
 <nb-card class="width25" style="width: 25% !important;" ><!--[dataSource]="productData"-->
-  <nb-card-header>{{productData.productName}}</nb-card-header>
+  <nb-card-header>{{productData["productName"]}}</nb-card-header>
   <nb-card-body>
-    {{productData.productType}}, ID: {{productData.productID}}
+    {{productData["productType"]}}, ID: {{productData["productID"]}}
   </nb-card-body>
-  <nb-card-footer>{{productData.productPrice}}</nb-card-footer>
+  <nb-card-footer>{{productData["productPrice"]}}</nb-card-footer>
 </nb-card>
 
 

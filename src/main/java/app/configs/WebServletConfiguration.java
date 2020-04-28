@@ -1,5 +1,8 @@
 package app.configs;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -8,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+
+//@ComponentScan
 public class WebServletConfiguration implements WebApplicationInitializer {
 
     @Override
@@ -21,6 +26,12 @@ public class WebServletConfiguration implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
     }
+
+  /*@Bean
+  public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerCustomizer() {
+    return container -> container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/index.html"));
+  }*/
+
 }
 
  /*

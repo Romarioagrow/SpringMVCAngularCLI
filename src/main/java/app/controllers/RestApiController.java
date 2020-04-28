@@ -3,6 +3,7 @@ package app.controllers;
 import app.domain.Product;
 import app.services.ProductService;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
-  private final ProductService productService = new ProductService();
+  private final ProductService productService;
+
+  @Autowired
+  public RestApiController(ProductService productService) {
+    this.productService = productService;
+  }
 
   @CrossOrigin(origins = "http://localhost:4200")
   @GetMapping("/products")

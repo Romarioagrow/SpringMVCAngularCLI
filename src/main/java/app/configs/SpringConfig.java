@@ -1,28 +1,26 @@
 package app.configs;
 
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @EnableWebMvc
-@ComponentScan(basePackages = { "app.controllers"})
+@ComponentScan(basePackages = { "app"})
 public class SpringConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-        //registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
+  @Override
+  public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+  }
 
-    /*@Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }*/
+  /*...*/
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/").allowedOrigins("http://localhost:8080");
+    registry.addMapping("/").allowedOrigins("http://localhost:4200");
+  }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+  @Override
+  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    configurer.enable();
+  }
 }
