@@ -1,19 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {DoBootstrap, NgModule} from '@angular/core';
-import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
+import {AppComponent} from './app.component';
+import {ProductsComponent} from './products/products.component';
 import {RouterModule} from "@angular/router";
-import { ProductPageComponent } from './product-page/product-page.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ProductPageComponent} from './product-page/product-page.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
-import { ProductTableComponent } from './product-table/product-table.component';
+import {ProductTableComponent} from './product-table/product-table.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
-import { HttpClientModule } from '@angular/common/http';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-/*import { MatTableModule } from "@angular/material"*/
-
+import {HttpClientModule} from '@angular/common/http';
+import {NbButtonModule, NbCardModule, NbLayoutModule, NbThemeModule} from '@nebular/theme';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
+import {APP_BASE_HREF} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -25,25 +24,24 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      /*{ path: '', component: ProductListComponent },*/
-      /*{ path: 'products/:productId', component: ProductDetailsComponent },*/
-      {path: '', component: ProductsComponent},
-      {path: 'product', component: ProductPageComponent},
+      {path: '', component: ProductsComponent, pathMatch: 'full'},
+      {path: 'app-cli', component: ProductsComponent, pathMatch: 'full'},
+      {path: 'product/:productID', component: ProductPageComponent, pathMatch: 'full'},
     ]),
     BrowserAnimationsModule,
     MatTableModule,
     MatCardModule,
     MatGridListModule,
     HttpClientModule,
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({name: 'default'}),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    NbCardModule,
+    NbButtonModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
 })
-
-
 
 
 export class AppModule implements DoBootstrap {

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-export interface PeriodicElement {
+/*export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
   symbol: string;
-}
+}*/
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+/*const ELEMENT_DATA: PeriodicElement[] = [
+  /!*{position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
@@ -18,9 +18,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},*!/
+];*/
 
 @Component({
   selector: 'app-product-table',
@@ -28,18 +27,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./product-table.component.css']
 })
 export class ProductTableComponent implements OnInit {
+  constructor(private http: HttpClient){}
 
-  constructor(private http: HttpClient){
-  }
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['productID', 'productName', 'productType', 'productPrice'];
+  dataSource :  Object = [];
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8080/app-cli/api/products').subscribe(data => {
+    this.http.get('http://localhost:8080/app-cli/api/products',{
+      headers: {'Access-Control-Allow-Origin':'*'}
+    }).subscribe(data => {
       console.log(data);
+      if (data) {
+        this.dataSource = data;
+      }
     });
   }
-
-
 }

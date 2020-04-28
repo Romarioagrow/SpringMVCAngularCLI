@@ -11,14 +11,21 @@ public class Product {
 
     /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)*/
-    UUID productID;
+    //UUID productID;
+    //UUID productID;
+
+    Long productID;
 
     String productName, productType, productInfo;
 
-    public Product(String productType, String productName) {
+    Integer productPrice;
 
-        this.productID = UUID.randomUUID();
+    public Product(Long productID, String productType, String productName, Integer productPrice) {
+        this.productID = productID;
         this.productType = productType;
         this.productName = productName;
+        this.productPrice = productPrice;
+
     }
+
 }
