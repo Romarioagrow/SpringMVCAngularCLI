@@ -25,7 +25,6 @@ import {APP_BASE_HREF} from '@angular/common';
     BrowserModule,
     RouterModule.forRoot([
       {path: '', component: ProductsComponent, pathMatch: 'full'},
-      {path: 'app-cli', component: ProductsComponent, pathMatch: 'full'},
       {path: 'product/:productID', component: ProductPageComponent, pathMatch: 'full'},
     ]),
     BrowserAnimationsModule,
