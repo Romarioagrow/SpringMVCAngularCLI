@@ -26,7 +26,7 @@ import {APP_BASE_HREF} from '@angular/common';
     RouterModule.forRoot([
       {path: '', component: ProductsComponent, pathMatch: 'full'},
       {path: 'app-cli', component: ProductsComponent, pathMatch: 'full'},
-      {path: 'app-cli/product/:productID', component: ProductPageComponent, pathMatch: 'full'},
+      {path: 'product/:productID', component: ProductPageComponent, pathMatch: 'full'},
     ]),
     BrowserAnimationsModule,
     MatTableModule,
@@ -39,7 +39,7 @@ import {APP_BASE_HREF} from '@angular/common';
     NbCardModule,
     NbButtonModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}],
   bootstrap: [AppComponent]
 })
 

@@ -33,7 +33,8 @@ export class ProductTableComponent implements OnInit {
   dataSource :  Object = [];
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8080/app-cli/api/products',{
+    /*http://localhost:8080/app-cli*/
+    this.http.get('api/products',{
       headers: {'Access-Control-Allow-Origin':'*'}
     }).subscribe(data => {
       console.log(data);

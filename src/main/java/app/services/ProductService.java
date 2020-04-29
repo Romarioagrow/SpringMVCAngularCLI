@@ -1,22 +1,25 @@
 package app.services;
 
 import app.domain.Product;
+//import app.repos.ProductRepo;
 import lombok.extern.java.Log;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log
-@Service
+@Service("productService")
 public class ProductService {
+  /*private final ProductRepo productRepo;
+  @Autowired
+  public ProductService(ProductRepo productRepo) {
+    this.productRepo = productRepo;
+  }*/
 
-  List<Product> products = createProductList();
-
-  public List<Product> createProductList() {
+  public List<Product>/*void*/ createProductList() {
     List<Product> products = new ArrayList<>();
-
     products.add(new Product((long) 1, "Телевизор", "Samsung T24H390SIX", 25500));
     products.add(new Product((long) 2,"Телевизор", "Lg 22MT58VF-PZ", 15200));
     products.add(new Product((long) 3,"Холодильник", "Indesit DS4160W", 13550));
@@ -30,19 +33,26 @@ public class ProductService {
     products.add(new Product((long) 11,"Музыкальный центр", "LG OM7550K", 4290));
 
     return products;
+    /*productRepo.saveAll(products);
+    productRepo.findAll().forEach(product -> log.info(product.getProductName()));*/
   }
 
-  public List<Product> getAllProducts() {
-    return this.products;
+  public Iterable<Product> getAllProducts() {
+    //return productRepo.findAll();
+    return createProductList();
   }
 
-  public Product getProductData(String productID) {
-    for (Product product : products) {
-      if (product.getProductID().toString().equals(productID)) {
+  public Product getProduct(Long productID) {
+    //return productRepo.findByProductID(productID);
+
+
+    for (Product product : createProductList()) {
+      if (product.getProductID().equals(productID)) {
         log.info(product.toString());
         return product;
       }
     }
     return null;
   }
+
 }

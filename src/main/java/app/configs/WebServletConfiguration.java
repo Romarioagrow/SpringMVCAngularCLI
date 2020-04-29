@@ -1,8 +1,5 @@
 package app.configs;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -15,17 +12,19 @@ import javax.servlet.ServletRegistration;
 //@ComponentScan
 public class WebServletConfiguration implements WebApplicationInitializer {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+  @Override
+  public void onStartup(ServletContext servletContext) throws ServletException {
 
-        AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
-        webContext.register(SpringConfig.class);
-        webContext.setServletContext(servletContext);
+    AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
+    webContext.register(SpringConfig.class);
+    webContext.setServletContext(servletContext);
 
-        ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(webContext));
-        servlet.setLoadOnStartup(1);
-        servlet.addMapping("/");
-    }
+    ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(webContext));
+    servlet.setLoadOnStartup(1);
+    servlet.addMapping("/");
+  }
+
+
 
   /*@Bean
   public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerCustomizer() {

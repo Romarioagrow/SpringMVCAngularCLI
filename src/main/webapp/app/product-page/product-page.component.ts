@@ -29,8 +29,7 @@ export class ProductPageComponent implements OnInit {
     const productID = currentURL.substr(currentURL.lastIndexOf('/') + 1)
     console.log(productID)
 
-    const url = 'http://localhost:8080/app-cli/api/products/product/' + productID
-    // const body = { productID: productID }
+    const url = 'api/products/product/' + productID
     const headers = { 'Access-Control-Allow-Origin': '*' }
 
     this.http.get<any>(url).subscribe(data => {

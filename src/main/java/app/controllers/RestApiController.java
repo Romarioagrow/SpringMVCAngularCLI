@@ -6,8 +6,6 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Log
 @RestController
 @RequestMapping("/api")
@@ -21,15 +19,15 @@ public class RestApiController {
 
   @CrossOrigin(origins = "http://localhost:4200")
   @GetMapping("/products")
-  public List<Product> sendAllProducts() {
+  public Iterable<Product> sendAllProducts() {
     log.info("REST GetMapping");
     return productService.getAllProducts();
   }
 
   @CrossOrigin(origins = "http://localhost:4200")
   @GetMapping("/products/product/{productID}")
-  public Product getProductData(@PathVariable String productID) {
+  public Product getProductData(@PathVariable Long productID) {
     log.info("productID: " + productID);
-    return productService.getProductData(productID);
+    return productService.getProduct(productID);
   }
 }
