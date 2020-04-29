@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 export interface ProductObject {
@@ -13,7 +13,6 @@ export interface ProductObject {
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-//displayedColumns: string[] = ['productID', 'productName', 'productType', 'productPrice'];
 
 export class ProductPageComponent implements OnInit {
   constructor(private http: HttpClient){}
@@ -25,16 +24,23 @@ export class ProductPageComponent implements OnInit {
   }
 
   getProductData() {
-    const currentURL = window.location.href
-    const productID = currentURL.substr(currentURL.lastIndexOf('/') + 1)
+    const productID = ProductPageComponent.resolveProductID();
     console.log(productID)
 
-    const url = 'api/products/product/' + productID
+    let apiUrl = 'api/products/product/' + productID
+    let url = isDevMode() ? 'http://localhost:8080/app-cli/' + apiUrl : apiUrl
+
     const headers = { 'Access-Control-Allow-Origin': '*' }
+    console.log('let url: ' + url)
 
     this.http.get<any>(url).subscribe(data => {
       console.log(data)
       this.productData = data;
     })
+  }
+
+  private static resolveProductID() {
+    const currentURL = window.location.href
+    return currentURL.substr(currentURL.lastIndexOf('/') + 1)
   }
 }

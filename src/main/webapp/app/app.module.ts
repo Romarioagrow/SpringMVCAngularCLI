@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {DoBootstrap, NgModule} from '@angular/core';
+import {DoBootstrap, isDevMode, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ProductsComponent} from './products/products.component';
 import {RouterModule} from "@angular/router";
@@ -13,6 +13,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {NbButtonModule, NbCardModule, NbLayoutModule, NbThemeModule} from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {APP_BASE_HREF} from '@angular/common';
+
+// const base_href = isDevMode() ? '/' : '/api-cli';
 
 @NgModule({
   declarations: [
@@ -38,12 +40,13 @@ import {APP_BASE_HREF} from '@angular/common';
     NbCardModule,
     NbButtonModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}],
+  providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}], // base_href
   bootstrap: [AppComponent]
 })
 
 export class AppModule implements DoBootstrap {
   ngDoBootstrap() {
   }
+
 
 }

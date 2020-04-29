@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 @Component({
@@ -13,7 +13,11 @@ export class ProductTableComponent implements OnInit {
   dataSource :  Object = [];
 
   ngOnInit(): void {
-    this.http.get('api/products',{
+    let apiUrl = 'api/products'
+    let url = isDevMode() ? 'http://localhost:8080/app-cli/' + apiUrl : apiUrl
+    console.log('let url: ' + url)
+
+    this.http.get(url,{
       headers: {'Access-Control-Allow-Origin':'*'}
     }).subscribe(data => {
       console.log(data);
