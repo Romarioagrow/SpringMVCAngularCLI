@@ -36,16 +36,5 @@ export class ProductPageComponent implements OnInit {
       console.log(data)
       this.productData = data;
     })
-
-
-    /*this.http.post('http://localhost:8080/app-cli/api/products/product',{
-      data:productID,
-      headers: {'Access-Control-Allow-Origin':'*'}
-    }).subscribe(data => {
-      console.log(data);
-      if (data) {
-        this.productData = data;
-      }
-    });*/
   }
 }
