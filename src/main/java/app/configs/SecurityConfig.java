@@ -13,11 +13,6 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Bean(name = "mvcHandlerMappingIntrospector")
-  public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
-    return new HandlerMappingIntrospector();
-  }
-
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
@@ -46,5 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder(8);
+  }
+
+  @Bean(name = "mvcHandlerMappingIntrospector")
+  public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
+    return new HandlerMappingIntrospector();
   }
 }
