@@ -6,12 +6,17 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {"app"})
-public class SpringConfig implements WebMvcConfigurer {
+public class WebMvcConfig implements WebMvcConfigurer {
 
   @Override
   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/static/**").addResourceLocations("/static/");
   }
+
+  /*@Override
+  public void addViewControllers(ViewControllerRegistry registry) {
+    registry.addViewController("/").setViewName("index");
+  }*/
 
   /*...CORS*/
   @Override

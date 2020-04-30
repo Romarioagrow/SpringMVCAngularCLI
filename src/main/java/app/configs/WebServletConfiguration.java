@@ -13,7 +13,7 @@ public class WebServletConfiguration extends AbstractAnnotationConfigDispatcherS
   @Override
   protected Class<?> [] getServletConfigClasses() {
     return new Class[] {
-      SpringConfig.class
+      WebMvcConfig.class
     };
   }
 
