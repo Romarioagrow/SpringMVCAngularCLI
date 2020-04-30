@@ -1,3 +1,14 @@
+<div>
+  <nb-layout-column style="padding-left: 0;">
+    <button (click)="createProductsList()" nbButton status="success" style="margin-bottom: 1%;">Create Products List</button>
+  </nb-layout-column>
+
+  <nb-layout-column>
+    <button nbButton outline status="success" style="margin-bottom: 1%;">Add New Product</button>
+  </nb-layout-column>
+</div>
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="productID">
@@ -28,6 +39,8 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+
 
 
 

@@ -17,17 +17,21 @@ public class RestApiController {
     this.productService = productService;
   }
 
-  @CrossOrigin(origins = "http://localhost:4200")
   @GetMapping("/products")
+  @CrossOrigin(origins = "http://localhost:4200")
   public Iterable<Product> sendAllProducts() {
-    log.info("REST GetMapping");
     return productService.getAllProducts();
   }
 
+  @GetMapping("/products/createList")
   @CrossOrigin(origins = "http://localhost:4200")
+  public Iterable<Product> createProductList() {
+    return productService.createProductList();
+  }
+
   @GetMapping("/products/product/{productID}")
+  @CrossOrigin(origins = "http://localhost:4200")
   public Product getProductData(@PathVariable Long productID) {
-    log.info("productID: " + productID);
     return productService.getProduct(productID);
   }
 }

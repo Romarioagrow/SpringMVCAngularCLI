@@ -14,7 +14,7 @@ import {NbButtonModule, NbCardModule, NbLayoutModule, NbThemeModule} from '@nebu
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {APP_BASE_HREF} from '@angular/common';
 
-// const base_href = isDevMode() ? '/' : '/api-cli';
+/// const base_href = isDevMode() ? '/' : '/api-cli';
 
 @NgModule({
   declarations: [
@@ -40,13 +40,11 @@ import {APP_BASE_HREF} from '@angular/common';
     NbCardModule,
     NbButtonModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}], // base_href
+  providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}], /// base_href
   bootstrap: [AppComponent]
 })
 
 export class AppModule implements DoBootstrap {
   ngDoBootstrap() {
   }
-
-
 }

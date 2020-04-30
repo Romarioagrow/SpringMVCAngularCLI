@@ -26,4 +26,24 @@ export class ProductTableComponent implements OnInit {
       }
     });
   }
+
+  createProductsList() {
+    console.log('createProductsList')
+
+    let apiUrl = 'api/products/createList'
+    let url = isDevMode() ? 'http://localhost:8080/app-cli/' + apiUrl : apiUrl
+    console.log('createProductsList url: ' + url)
+
+    this.http.get(url,{
+      headers: {'Access-Control-Allow-Origin':'*'}
+    }).subscribe(data => {
+      console.log(data);
+      if (data) {
+        console.log(data)
+        this.dataSource = data
+      }
+    });
+
+  }
+
 }

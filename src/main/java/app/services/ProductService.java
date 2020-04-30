@@ -1,24 +1,43 @@
 package app.services;
 
 import app.domain.Product;
-//import app.repos.ProductRepo;
+import app.repos.ProductRepo;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Log
 @Service("productService")
+@Transactional
 public class ProductService {
-  /*private final ProductRepo productRepo;
+  private final ProductRepo productRepo;
+
   @Autowired
   public ProductService(ProductRepo productRepo) {
     this.productRepo = productRepo;
-  }*/
+  }
 
-  public List<Product>/*void*/ createProductList() {
+  public void save(Product product) {
+    productRepo.save(product);
+  }
+
+  public List<Product> listAll() {
+    return (List<Product>) productRepo.findAll();
+  }
+
+  public Product get(Long id) {
+    return productRepo.findById(id).get();
+  }
+
+  public void delete(Long id) {
+    productRepo.deleteById(id);
+  }
+
+  public Iterable<Product> createProductList() {
     List<Product> products = new ArrayList<>();
     products.add(new Product((long) 1, "Телевизор", "Samsung T24H390SIX", 25500));
     products.add(new Product((long) 2,"Телевизор", "Lg 22MT58VF-PZ", 15200));
@@ -32,27 +51,16 @@ public class ProductService {
     products.add(new Product((long) 10,"Блинница", "Gfgril GFC-B200 PERFECT", 3500));
     products.add(new Product((long) 11,"Музыкальный центр", "LG OM7550K", 4290));
 
-    return products;
-    /*productRepo.saveAll(products);
-    productRepo.findAll().forEach(product -> log.info(product.getProductName()));*/
+    productRepo.saveAll(products);
+    productRepo.findAll().forEach(product -> log.info(product.getProductName()));
+    return productRepo.findAll();
   }
 
   public Iterable<Product> getAllProducts() {
-    //return productRepo.findAll();
-    return createProductList();
+    return productRepo.findAll();
   }
 
   public Product getProduct(Long productID) {
-    //return productRepo.findByProductID(productID);
-
-
-    for (Product product : createProductList()) {
-      if (product.getProductID().equals(productID)) {
-        log.info(product.toString());
-        return product;
-      }
-    }
-    return null;
+    return productRepo.findByProductID(productID);
   }
-
 }
