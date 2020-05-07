@@ -13,11 +13,11 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   private final SecurityAuthenticationProvider authProvider;
 
   @Autowired
-  public SecurityConfig(SecurityAuthenticationProvider authProvider) {
+  public WebSecurityConfig(SecurityAuthenticationProvider authProvider) {
     this.authProvider = authProvider;
   }
 
