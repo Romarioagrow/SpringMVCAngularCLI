@@ -11,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +31,7 @@ public class AuthController {
   }
 
   /*Request user credentials in json*/
+  @CrossOrigin(origins = "http://localhost:4200")
   @PostMapping("/login")
   private ResponseEntity<?> login(@RequestBody Map<String, String> credentials, HttpServletRequest request) {
     log.info("CONTROLLER: PostMapping LOGIN()");
@@ -40,7 +39,7 @@ public class AuthController {
     try
     {
       Authentication resultAuth = authProvider.processLogin(credentials, request);
-      log.info("resultAuth: " +  resultAuth.getPrincipal().toString());
+      log.info("Principal: " +  resultAuth.getPrincipal().toString());
 
       if (resultAuth.getAuthorities().contains(Role.ADMIN)) {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
@@ -49,22 +48,27 @@ public class AuthController {
     catch (BadCredentialsException e) {
       return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
-    ///
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  //check AuthenticationPrincipal
+  @CrossOrigin(origins = "http://localhost:4200")
+  @PostMapping("/checkAuthentication")
+  private User checkAuthentication(@AuthenticationPrincipal User user) {
+    log.info("AuthenticationPrincipal(): " + user);
+    return user;
   }
 
   @CrossOrigin(origins = "http://localhost:4200")
   @PostMapping("/checkAuth")
   private User checkAuth(@AuthenticationPrincipal User user) {
-    SecurityContext securityContext = SecurityContextHolder.getContext();
-    log.info("checkAuth securityContext.getAuthentication().isAuthenticated(): " + securityContext.getAuthentication().isAuthenticated());
-    log.info("checkAuth securityContext.getAuthentication().getPrincipal().toString(): " + securityContext.getAuthentication().getPrincipal().toString());
-
+    //SecurityContext securityContext = SecurityContextHolder.getContext();
+    //log.info("checkAuth securityContext.getAuthentication().isAuthenticated(): " + securityContext.getAuthentication().isAuthenticated());
+    //log.info("checkAuth securityContext.getAuthentication().getPrincipal().toString(): " + securityContext.getAuthentication().getPrincipal().toString());
     if (user == null) {
       System.out.println("NO USER!");
     }
     else System.out.println("CHECK USER: " + user.toString());
-
     return user;
   }
 

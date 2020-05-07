@@ -3,12 +3,14 @@ package app.services;
 import app.domain.User;
 import app.domain.roles.Role;
 import app.repos.UserRepo;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+@Log
 @Service
 public class UserService {
   private final UserRepo userRepo;
@@ -21,14 +23,18 @@ public class UserService {
   }
 
   public User createUser(String username, String password, Role role) {
-    User user = new User();
-    user.setPassword(passwordEncoder.encode(password));
-    user.setUsername(username);
-    user.setActive(true);
-    user.setRoles(Collections.singleton(role));
-    userRepo.save(user);
-    System.out.println("Created user: " + user.toString());
-    return user;
+    if (userRepo.findByUsername(username) == null) {
+      User user = new User();
+      user.setPassword(passwordEncoder.encode(password));
+      user.setUsername(username);
+      user.setActive(true);
+      user.setRoles(Collections.singleton(role));
+      userRepo.save(user);
+      System.out.println("Created user: " + user.toString());
+      return user;
+    }
+    log.warning("USER ALREADY EXISTS!");
+    return null;
   }
 
   public User createAdmin() {
