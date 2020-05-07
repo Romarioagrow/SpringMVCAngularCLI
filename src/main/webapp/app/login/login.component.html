@@ -1,0 +1,55 @@
+<div class="container" style="width: 25%; margin-left: 38%;">
+
+  <nb-alert status="success" *ngIf="userCreatedSuccessfully">
+    <span>username: {{userInfo.username}}</span>
+  </nb-alert>
+
+  <nb-alert status="danger" *ngIf="loginError">
+    <span>{{errorMessage}}</span>
+  </nb-alert>
+
+  <div>
+    <nb-card>
+      <nb-card-header>
+        <span>Login Page</span>
+        <span *ngIf="auth">&nbsp;{{userObject.username}}</span>
+      </nb-card-header>
+      <nb-card-body>
+        <input type="text" [(ngModel)]="username" nbInput fullWidth status="primary" placeholder="Username" style="margin-bottom: 5%">
+        <input type="text" [(ngModel)]="password" nbInput fullWidth status="info" placeholder="Password">
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton fullWidth outline status="success" (click)="doLogin()" [disabled]="auth">
+          Login
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+
+  <div>
+    <nb-card>
+     <!-- <nb-card-body >-->
+        <nb-layout-column>
+          <button nbButton fullWidth status="success" (click)="createAdmin()">Create Admin</button>
+        </nb-layout-column>
+
+        <nb-layout-column>
+          <button nbButton outline fullWidth status="success" (click)="createUser()" >Create User</button>
+        </nb-layout-column>
+
+        <nb-layout-column>
+          <button nbButton outline fullWidth status="basic" (click)="checkAuth()">Check Auth</button>
+        </nb-layout-column>
+
+        <nb-layout-column>
+          <button nbButton outline fullWidth status="danger" *ngIf="auth" (click)="logout()" >Logout</button>
+        </nb-layout-column>
+      <!--</nb-card-body>-->
+    </nb-card>
+  </div>
+
+
+</div>
+
+
+

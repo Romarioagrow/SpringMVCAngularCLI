@@ -44,5 +44,4 @@ public class UserService {
   public User createUser() {
     return createUser("user", "user", Role.USER);
   }
-
 }
