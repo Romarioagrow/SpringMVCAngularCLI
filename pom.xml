@@ -100,6 +100,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+      <version>3.4.1.Final</version>
+    </dependency>
+
+
+    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
@@ -119,25 +126,24 @@
       <version>1.4.200</version>
     </dependency>-->
 
+    <!--Security-->
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-core</artifactId>
       <version>5.3.1.RELEASE</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-web</artifactId>
       <version>5.3.1.RELEASE</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-config</artifactId>
       <version>5.2.1.RELEASE</version>
     </dependency>
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
       <version>1.7.20</version>
@@ -146,13 +152,9 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.1.7</version>
-    </dependency>
+    </dependency>-->
 
-    <dependency>
-      <groupId>org.jboss.logging</groupId>
-      <artifactId>jboss-logging</artifactId>
-      <version>3.3.0.Final</version>
-    </dependency>
+
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

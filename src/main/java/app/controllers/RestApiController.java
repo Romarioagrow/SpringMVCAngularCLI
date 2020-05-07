@@ -17,14 +17,14 @@ public class RestApiController {
     this.productService = productService;
   }
 
-  @GetMapping("/products")
   @CrossOrigin(origins = "http://localhost:4200")
+  @GetMapping("/products")
   public Iterable<Product> sendAllProducts() {
     return productService.getAllProducts();
   }
 
-  @GetMapping("/products/createList")
   @CrossOrigin(origins = "http://localhost:4200")
+  @GetMapping("/products/createList")
   public Iterable<Product> createProductList() {
     return productService.createProductList();
   }

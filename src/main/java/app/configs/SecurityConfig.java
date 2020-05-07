@@ -1,7 +1,9 @@
 package app.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,28 +14,38 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+  private final SecurityAuthenticationProvider authProvider;
+
+  @Autowired
+  public SecurityConfig(SecurityAuthenticationProvider authProvider) {
+    this.authProvider = authProvider;
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.authenticationProvider(authProvider);
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+
     http
-      .antMatcher("/**")
-        .authorizeRequests()
-      .antMatchers("/", "/login**", "/js/**", "/error**", "/user/registration")
-        .permitAll()
-      .and()
-        .authorizeRequests()
-        .antMatchers("/admin**").hasAuthority("ADMIN")
-        .mvcMatchers("/api/user/**").authenticated()
+      .authorizeRequests()
+        .antMatchers("/admin").hasAuthority("ADMIN")
+        .antMatchers("/user").authenticated()
         .anyRequest().permitAll()
       .and()
         .formLogin()
-        .loginPage("/user/login")
-        .loginProcessingUrl("/user/login")
-        .defaultSuccessUrl("/", true)
+        .loginPage("/login")
         .permitAll()
+        /*.loginProcessingUrl("/login/process")
+        .usernameParameter("username")
+        .passwordParameter("password")
+        .defaultSuccessUrl("/", true)*/
       .and()
-        .logout().permitAll()
-        .logoutUrl("/user/logout")
+        .logout()
+        .permitAll()
+        .logoutUrl("/logout")
         .logoutSuccessUrl("/")
       .and().csrf().disable();
   }
@@ -47,4 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public HandlerMappingIntrospector mvcHandlerMappingIntrospector() {
     return new HandlerMappingIntrospector();
   }
+
 }

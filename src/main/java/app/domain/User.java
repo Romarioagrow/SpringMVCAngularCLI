@@ -1,5 +1,6 @@
 package app.domain;
 
+import app.domain.roles.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,19 +27,32 @@ public class User implements UserDetails {
 
   private boolean isActive;
 
+  @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+  @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+  @Enumerated(EnumType.STRING)
+  private Set<Role> roles;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    return getRoles();
+  }
+
+  public boolean isAdmin() {
+    return roles.contains(Role.ADMIN);
+  }
+
+  public boolean isUser() {
+    return roles.contains(Role.USER);
   }
 
   @Override
   public String getPassword() {
-    return password;
+    return this.password;
   }
 
   @Override
   public String getUsername() {
-    return username;
+    return this.username;
   }
 
   @Override

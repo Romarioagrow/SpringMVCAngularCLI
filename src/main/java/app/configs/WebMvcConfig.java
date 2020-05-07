@@ -13,10 +13,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     registry.addResourceHandler("/static/**").addResourceLocations("/static/");
   }
 
-  /*@Override
+  @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/").setViewName("index");
-  }*/
+    registry.addViewController("/").setViewName("index.html");
+    registry.addViewController("/login").setViewName("index.html");
+  }
+
 
   /*...CORS*/
   @Override

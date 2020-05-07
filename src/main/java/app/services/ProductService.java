@@ -1,13 +1,17 @@
 package app.services;
 
 import app.domain.Product;
+import app.domain.User;
+import app.domain.roles.Role;
 import app.repos.ProductRepo;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Log
@@ -15,10 +19,12 @@ import java.util.List;
 @Transactional
 public class ProductService {
   private final ProductRepo productRepo;
+  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public ProductService(ProductRepo productRepo) {
+  public ProductService(ProductRepo productRepo, PasswordEncoder passwordEncoder) {
     this.productRepo = productRepo;
+    this.passwordEncoder = passwordEncoder;
   }
 
   public void save(Product product) {
@@ -63,4 +69,5 @@ public class ProductService {
   public Product getProduct(Long productID) {
     return productRepo.findByProductID(productID);
   }
+
 }

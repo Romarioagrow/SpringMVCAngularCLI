@@ -11,16 +11,17 @@ import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {HttpClientModule} from '@angular/common/http';
 import {
-  NbActionsModule,
-  NbButtonModule,
-  NbCardModule,
-  NbIconModule, NbInputModule,
-  NbLayoutModule,
-  NbThemeModule
+    NbActionsModule, NbAlertModule,
+    NbButtonModule,
+    NbCardModule,
+    NbIconModule, NbInputModule,
+    NbLayoutModule,
+    NbThemeModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {APP_BASE_HREF} from '@angular/common';
 import { LoginComponent } from './login/login.component';
+import {FormsModule} from "@angular/forms";
 
 /// const base_href = isDevMode() ? '/' : '/api-cli';
 
@@ -51,7 +52,9 @@ import { LoginComponent } from './login/login.component';
     NbButtonModule,
     NbIconModule,
     NbActionsModule,
-    NbInputModule
+    NbInputModule,
+    NbAlertModule,
+    FormsModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/app-cli'}], /// base_href
   bootstrap: [AppComponent]

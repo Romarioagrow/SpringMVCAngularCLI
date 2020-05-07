@@ -23,6 +23,7 @@ public class WebServletConfiguration extends AbstractAnnotationConfigDispatcherS
       "/"
     };
   }
+}
 
   /* implements WebApplicationInitializer
   @Override
@@ -34,5 +35,5 @@ public class WebServletConfiguration extends AbstractAnnotationConfigDispatcherS
     servlet.setLoadOnStartup(1);
     servlet.addMapping("/");
   }*/
-}
+
 
