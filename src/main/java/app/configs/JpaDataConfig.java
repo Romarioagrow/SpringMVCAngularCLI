@@ -36,10 +36,10 @@ public class JpaDataConfig {
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+    final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+
     entityManagerFactoryBean.setDataSource(dataSource());
     entityManagerFactoryBean.setPackagesToScan(new String[] {"app.domain"});
-
-    final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
     entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
     entityManagerFactoryBean.setJpaProperties(additionalProperties());
     return entityManagerFactoryBean;
